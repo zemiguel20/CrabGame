@@ -23,7 +23,7 @@ public class SeagullController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = transform.forward * speed;
+        rb.position += transform.forward * speed * Time.fixedDeltaTime;
     }
 
     public void SetDirection(Vector2 direction)
