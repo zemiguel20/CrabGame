@@ -10,11 +10,12 @@ public class SeagullMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position += transform.forward * speed;
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     public void SetDirection(Transform player)
     {
-        // TODO: implement
+        Vector3 pos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(pos);
     }
 }
