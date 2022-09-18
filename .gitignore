@@ -74,3 +74,6 @@ crashlytics-build.properties
 # Visual Scripting
 
 Unity.VisualScripting*
+
+# UI elements
+UIElementsSchema/
