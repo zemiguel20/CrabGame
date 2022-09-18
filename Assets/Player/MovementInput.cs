@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviour
 {
-    [SerializeField] private CharacterController charControl;
-
-    public float speed;
-
-    private Vector3 direction = Vector3.zero;
+    [SerializeField] private CrabController controller;
 
     void Update()
     {
-        direction.x = Input.GetAxisRaw("HorizontalKeys");
-        direction.z = Input.GetAxisRaw("VerticalKeys");
+        Vector2 direction = new(
+            Input.GetAxisRaw("HorizontalKeys"),
+            Input.GetAxisRaw("VerticalKeys")
+            );
         direction.Normalize();
-        charControl.SimpleMove(direction * speed);
+
+        controller.directionInput = direction;
     }
 }

@@ -20,9 +20,7 @@ public class Gamemode : MonoBehaviour
     {
         // Spawn player
         playerInstance = Instantiate(player);
-        playerInstance.
-            GetComponent<CharacterCollisionEvent>().
-            collisionEvent.AddListener(PlayerHitCallback);
+        playerInstance.GetComponent<CrabController>().collisionEvent.AddListener(PlayerHitCallback);
 
         // Create pool of seagulls
         instancePool = new List<GameObject>();
@@ -36,7 +34,8 @@ public class Gamemode : MonoBehaviour
 
     void Start()
     {
-        playerInstance.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
+        playerInstance.transform.position = new Vector3(0.0f, 0.5f, 0.0f);
+        playerInstance.GetComponent<CrabController>().speed = playerSpeed;
 
         gameover = false;
         StartCoroutine(SeagullSpawnLoop());
@@ -84,9 +83,9 @@ public class Gamemode : MonoBehaviour
         sgcomponent.SetDirection(playerInstance.transform);
     }
 
-    private void PlayerHitCallback(ControllerColliderHit hit)
+    private void PlayerHitCallback(Collision collision)
     {
-        Debug.Log(hit.collider.tag + "aaa");
+        Debug.Log(collision.collider.tag + "aaa");
         //if (hit.collider.CompareTag("Seagull"))
         //{
         //    Debug.Log("GAME OVER");
