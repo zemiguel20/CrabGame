@@ -540,9 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438905ae8e01e4f41ad6bc226d1ef533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7181463978790111822, guid: d0f2208514af2da43aabcbf93779d32e, type: 3}
   playerSpeed: 20
-  seagull: {fileID: 4064058987032844553, guid: 898a352b455917542a8c00679d66fb3d, type: 3}
   seagullSpeed: 20
   seagullSpawnPoints:
   - {x: 20, y: 2, z: 0}
@@ -690,6 +688,70 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6133812050122478834}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &916751446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 916751448}
+  - component: {fileID: 916751447}
+  - component: {fileID: 916751449}
+  m_Layer: 5
+  m_Name: UIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &916751447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916751446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 16d987345a310e642bd88fbd19c32124, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 0c9e99aedcdc0064c9e13a7e44b70993,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!4 &916751448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916751446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &916751449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916751446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69df97fe99abe14ea26cb2d6a42eb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 916751447}
+  gamemode: {fileID: 640968358}
 --- !u!1001 &937547972
 PrefabInstance:
   m_ObjectHideFlags: 0

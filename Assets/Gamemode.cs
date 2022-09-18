@@ -12,7 +12,15 @@ public class Gamemode : MonoBehaviour
     [SerializeField] private float seagullSpawnDelay;
     private List<GameObject> instancePool;
 
-    private bool gameover;
+    public enum GameState
+    {
+        START,
+        RUNNING,
+        GAMEOVER
+    }
+    public GameState state { get; private set; }
+
+    public float time { get; private set; }
 
     void Awake()
     {
@@ -20,6 +28,7 @@ public class Gamemode : MonoBehaviour
         GameObject playerPrefab = Resources.Load<GameObject>("Player");
         playerInstance = Instantiate(playerPrefab);
         playerInstance.GetComponent<CrabController>().collisionEvent.AddListener(PlayerHitCallback);
+        playerInstance.SetActive(false);
 
         // Instance pool of seagulls
         GameObject seagullPrefab = Resources.Load<GameObject>("Seagull");
@@ -30,9 +39,29 @@ public class Gamemode : MonoBehaviour
             instance.SetActive(false);
             instancePool.Add(instance);
         }
+
+        state = GameState.START;
     }
 
-    void Start()
+    private void Update()
+    {
+        if ((state == GameState.START || state == GameState.GAMEOVER)
+            && Input.GetKey(KeyCode.Space))
+        {
+            StartGame();
+        }
+
+        if (state == GameState.RUNNING)
+        {
+            time += Time.deltaTime;
+        }
+
+        // APPLICATION QUIT
+        if (Input.GetKey(KeyCode.Escape))
+            Application.Quit();
+    }
+
+    void StartGame()
     {
         // Activate and position player
         playerInstance.transform.position = new Vector3(0.0f, 0.5f, 0.0f);
@@ -45,14 +74,16 @@ public class Gamemode : MonoBehaviour
             instance.SetActive(false);
         }
 
-        gameover = false;
+        state = GameState.RUNNING;
+
+        time = 0.0f;
 
         StartCoroutine(SeagullSpawnLoop());
     }
 
     IEnumerator SeagullSpawnLoop()
     {
-        while (!gameover)
+        while (state == GameState.RUNNING)
         {
             yield return new WaitForSeconds(seagullSpawnDelay);
             SpawnSeagull();
@@ -99,7 +130,7 @@ public class Gamemode : MonoBehaviour
         if (collision.collider.CompareTag("Seagull"))
         {
             Debug.Log("GAME OVER");
-            gameover = true;
+            state = GameState.GAMEOVER;
 
             playerInstance.SetActive(false);
         }
