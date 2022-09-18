@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Gamemode : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private float playerSpeed;
     private GameObject playerInstance;
 
-    [SerializeField] private GameObject seagull;
     [SerializeField] private float seagullSpeed;
     [SerializeField] private List<Vector3> seagullSpawnPoints;
     [SerializeField] private float seagullSpawnDelay;
@@ -19,14 +17,16 @@ public class Gamemode : MonoBehaviour
     void Awake()
     {
         // Instance player
-        playerInstance = Instantiate(player);
+        GameObject playerPrefab = Resources.Load<GameObject>("Player");
+        playerInstance = Instantiate(playerPrefab);
         playerInstance.GetComponent<CrabController>().collisionEvent.AddListener(PlayerHitCallback);
 
         // Instance pool of seagulls
+        GameObject seagullPrefab = Resources.Load<GameObject>("Seagull");
         instancePool = new List<GameObject>();
         for (int i = 0; i < 15; i++)
         {
-            GameObject instance = Instantiate(seagull);
+            GameObject instance = Instantiate(seagullPrefab);
             instance.SetActive(false);
             instancePool.Add(instance);
         }
@@ -76,7 +76,7 @@ public class Gamemode : MonoBehaviour
         // If all already active, create a new one as fallback
         if (!spawnedInstance)
         {
-            spawnedInstance = Instantiate(seagull);
+            spawnedInstance = Instantiate(instancePool[0]);
             instancePool.Add(spawnedInstance);
         }
 
