@@ -27,7 +27,8 @@ public class CrabController : MonoBehaviour
         // If colliding horizontally, nullify horizontal direction
         // Allows vertical wall sliding
         Vector3 horizontalDir = new Vector3(direction.x, 0.0f, 0.0f);
-        if (Physics.Raycast(rb.position, horizontalDir, coll.size.x))
+        Debug.DrawRay(rb.position, horizontalDir * coll.size.x * 0.5f);
+        if (Physics.Raycast(rb.position, horizontalDir, coll.size.x * 0.5f))
         {
             direction.x = 0.0f;
         }
@@ -35,7 +36,8 @@ public class CrabController : MonoBehaviour
         // If colliding vertically, nullify vertical direction
         // Allows horizontal wall sliding
         Vector3 verticalDir = new Vector3(0.0f, 0.0f, direction.z);
-        if (Physics.Raycast(rb.position, verticalDir, coll.size.z))
+        Debug.DrawRay(rb.position, verticalDir * coll.size.z * 0.5f);
+        if (Physics.Raycast(rb.position, verticalDir, coll.size.z * 0.5f))
         {
             direction.z = 0.0f;
         }
