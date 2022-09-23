@@ -1,5 +1,7 @@
-game-controller.png - made by Flat Icons, from https://www.flaticon.com/free-icon/game-controller_2331852
+icon-game-controller.png - <a href="https://www.flaticon.com/free-icons/gaming" title="gaming icons">Gaming icons created by Flat Icons - Flaticon</a>
 
-egg.png - made by berkahicon, from https://www.flaticon.com/free-icon/egg_1296541
+icon-egg.png - <a href="https://www.flaticon.com/free-icons/dinosaur" title="dinosaur icons">Dinosaur icons created by berkahicon - Flaticon</a>
 
-gear.png - made by Freepik, from https://www.flaticon.com/free-icon/gear_484562
+icon-gear.png - <a href="https://www.flaticon.com/free-icons/gear" title="gear icons">Gear icons created by Freepik - Flaticon</a>
+
+icon-goal.png - <a href="https://www.flaticon.com/free-icons/goal" title="goal icons">Goal icons created by Freepik - Flaticon</a>
