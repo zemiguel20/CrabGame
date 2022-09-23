@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style.uss?fileID=7433441132597879392&amp;guid=ee8a1dd73f6dd4e4ab17756b11e9819c&amp;type=3#Style" />
+    <ui:VisualElement name="main-menu" style="flex-direction: column; justify-content: center; top: 50%; position: absolute; width: 100%; align-items: center;">
+        <ui:Button text="Play" display-tooltip-when-elided="true" name="play-button" class="button" />
+        <ui:Button text="Quit" display-tooltip-when-elided="true" name="quit-button" class="button" />
+    </ui:VisualElement>
+</ui:UXML>

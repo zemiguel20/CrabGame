@@ -1,0 +1,22 @@
+.button {
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    background-color: rgb(255, 255, 255);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    width: 80px;
+}
+
+.button:hover {
+    border-left-color: rgba(0, 209, 241, 255);
+    border-right-color: rgba(0, 209, 241, 255);
+    border-top-color: rgba(0, 209, 241, 255);
+    border-bottom-color: rgba(0, 209, 241, 255);
+}
+
+.text {
+}

@@ -1,9 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
-public class KeepAspectRatio : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private void Awake()
     {
+        // Set resolution to square
 
         int length =
             Display.main.systemWidth > Display.main.systemHeight ?
@@ -11,5 +15,10 @@ public class KeepAspectRatio : MonoBehaviour
             Display.main.renderingWidth;
 
         Screen.SetResolution(length, length, true);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -1,26 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Gamemode : MonoBehaviour
+public class GameMode : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed;
     private GameObject playerInstance;
+    [SerializeField] private float playerSpeed;
 
-    [SerializeField] private float seagullSpeed;
+    [Space(10)]
+
+    [Header("Easy Difficulty")]
+    [SerializeField] private float seagullSpeedEasy;
+    [SerializeField] private float seagullSpawnCooldownEasy;
+
+    [Header("Medium Difficulty")]
+    [SerializeField] private float seagullSpeedMedium;
+    [SerializeField] private float seagullSpawnCooldownMedium;
+
+    [Header("Hard Difficulty")]
+    [SerializeField] private float seagullSpeedHard;
+    [SerializeField] private float seagullSpawnCooldownHard;
+
+    [Space(10)]
+
+    [SerializeField] private int timeLimit;
+
+    [Space(10)]
+
+    private float selectedSeagullSpeed;
+    private WaitForSeconds selectedSpawnCooldown;
+    private Coroutine seagullSpawner;
+
+    // Make spawnpoints a GameObject
     [SerializeField] private List<Vector3> seagullSpawnPoints;
-    [SerializeField] private float seagullSpawnDelay;
     private List<GameObject> instancePool;
 
-    public enum GameState
-    {
-        START,
-        RUNNING,
-        GAMEOVER
-    }
-    public GameState state { get; private set; }
+    public UnityEvent gameLost;
+    public UnityEvent gameWon;
 
-    public float time { get; private set; }
+    private Coroutine timeCount;
+    public int time { get; private set; }
 
     void Awake()
     {
@@ -36,29 +56,30 @@ public class Gamemode : MonoBehaviour
         for (int i = 0; i < 15; i++)
         {
             GameObject instance = Instantiate(seagullPrefab);
-            instance.SetActive(false);
             instancePool.Add(instance);
         }
-
-        state = GameState.START;
+        SetAllSeagullsInactive();
     }
 
-    private void Update()
+    public void StartEasyRun()
     {
-        if ((state == GameState.START || state == GameState.GAMEOVER)
-            && Input.GetKey(KeyCode.Space))
-        {
-            StartGame();
-        }
+        selectedSeagullSpeed = seagullSpawnCooldownEasy;
+        selectedSpawnCooldown = new WaitForSeconds(seagullSpawnCooldownEasy);
+        StartGame();
+    }
 
-        if (state == GameState.RUNNING)
-        {
-            time += Time.deltaTime;
-        }
+    public void StartMediumRun()
+    {
+        selectedSeagullSpeed = seagullSpeedMedium;
+        selectedSpawnCooldown = new WaitForSeconds(seagullSpawnCooldownMedium);
+        StartGame();
+    }
 
-        // APPLICATION QUIT
-        if (Input.GetKey(KeyCode.Escape))
-            Application.Quit();
+    public void StartHardRun()
+    {
+        selectedSeagullSpeed = seagullSpeedHard;
+        selectedSpawnCooldown = new WaitForSeconds(seagullSpawnCooldownHard);
+        StartGame();
     }
 
     void StartGame()
@@ -74,18 +95,17 @@ public class Gamemode : MonoBehaviour
             instance.SetActive(false);
         }
 
-        state = GameState.RUNNING;
+        time = 0;
 
-        time = 0.0f;
-
-        StartCoroutine(SeagullSpawnLoop());
+        seagullSpawner = StartCoroutine(SeagullSpawnLoop());
+        timeCount = StartCoroutine(TimeCount());
     }
 
     IEnumerator SeagullSpawnLoop()
     {
-        while (state == GameState.RUNNING)
+        while (true)
         {
-            yield return new WaitForSeconds(seagullSpawnDelay);
+            yield return selectedSpawnCooldown;
             SpawnSeagull();
         }
     }
@@ -118,21 +138,50 @@ public class Gamemode : MonoBehaviour
         spawnedInstance.transform.position = seagullSpawnPoints[randomInd];
         // Set movement
         SeagullController sgcomponent = spawnedInstance.GetComponent<SeagullController>();
-        sgcomponent.speed = seagullSpeed;
+        sgcomponent.speed = selectedSeagullSpeed;
         Vector2 seagullDirection = new Vector2(
             playerInstance.transform.position.x,
             playerInstance.transform.position.z);
         sgcomponent.SetDirection(seagullDirection);
     }
 
+    IEnumerator TimeCount()
+    {
+        while (time < timeLimit)
+        {
+            yield return new WaitForSeconds(1.0f);
+            time++;
+        }
+
+        EndGame(true);
+    }
+
     private void PlayerHitCallback(Collision collision)
     {
         if (collision.collider.CompareTag("Seagull"))
         {
-            Debug.Log("GAME OVER");
-            state = GameState.GAMEOVER;
+            EndGame(false);
+        }
+    }
 
-            playerInstance.SetActive(false);
+    public void EndGame(bool playerWon)
+    {
+        StopCoroutine(timeCount);
+        StopCoroutine(seagullSpawner);
+        SetAllSeagullsInactive();
+        playerInstance.SetActive(false);
+
+        if (playerWon)
+            gameWon.Invoke();
+        else
+            gameLost.Invoke();
+    }
+
+    public void SetAllSeagullsInactive()
+    {
+        foreach (GameObject seagull in instancePool)
+        {
+            seagull.SetActive(false);
         }
     }
 }
