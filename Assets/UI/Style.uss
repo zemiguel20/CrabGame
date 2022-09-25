@@ -12,11 +12,18 @@
 }
 
 .button:hover {
-    border-left-color: rgba(0, 209, 241, 255);
-    border-right-color: rgba(0, 209, 241, 255);
-    border-top-color: rgba(0, 209, 241, 255);
-    border-bottom-color: rgba(0, 209, 241, 255);
+    border-left-color: rgb(0, 209, 241);
+    border-right-color: rgb(0, 209, 241);
+    border-top-color: rgb(0, 209, 241);
+    border-bottom-color: rgb(0, 209, 241);
 }
 
 .text {
+    -unity-font-style: bold;
+    font-size: 15px;
+}
+
+.title {
+    -unity-font-definition: url('project://database/Assets/UI/Fonts/tribeca/tribeca.regular%20SDF.asset?fileID=11400000&guid=d1d24a5a9e7ce084185daf326cb1ecb9&type=2#tribeca.regular SDF');
+    -unity-font: url('project://database/Assets/UI/Fonts/tribeca/tribeca.regular.ttf?fileID=12800000&guid=d82d69d33b2d8614f887d21885059dcc&type=3#tribeca.regular');
 }

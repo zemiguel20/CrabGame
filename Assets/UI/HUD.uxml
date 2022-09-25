@@ -1,3 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label text="30.00" display-tooltip-when-elided="true" name="time-label" style="position: absolute; top: 10%; width: 100%; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; text-shadow: 1px 1px 0 rgb(0, 0, 0); margin-left: auto; margin-right: auto; margin-top: 2px;" />
+    <Style src="project://database/Assets/UI/Style.uss?fileID=7433441132597879392&amp;guid=ee8a1dd73f6dd4e4ab17756b11e9819c&amp;type=3#Style" />
+    <ui:VisualElement style="align-items: center; top: 10%;">
+        <ui:Label text="30" display-tooltip-when-elided="true" name="time-label" class="text title" style="-unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; text-shadow: 2px 2px 1px rgb(0, 0, 0); margin-left: auto; margin-right: auto; margin-top: 2px; font-size: 40px; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0);" />
+    </ui:VisualElement>
 </ui:UXML>

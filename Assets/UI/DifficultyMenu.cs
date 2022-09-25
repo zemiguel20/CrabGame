@@ -6,6 +6,10 @@ public class DifficultyMenu : MonoBehaviour
 {
     [SerializeField] private UIDocument document;
 
+    [TextArea]
+    [SerializeField] private string instructionsText;
+    [Space(10)]
+
     public UnityEvent easyPressed;
     public UnityEvent mediumPressed;
     public UnityEvent hardPressed;
@@ -24,6 +28,9 @@ public class DifficultyMenu : MonoBehaviour
 
         Button backButton = document.rootVisualElement.Query<Button>("back-button");
         backButton.clicked += backPressed.Invoke;
+
+        Label instructions = document.rootVisualElement.Query<Label>("instructions-text");
+        instructions.text = instructionsText;
     }
 
     private void OnDisable()

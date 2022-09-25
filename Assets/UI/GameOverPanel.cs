@@ -16,11 +16,9 @@ public class GameOverPanel : MonoBehaviour
 
     public void SetResult(bool playerWon)
     {
-        Label wonLabel = document.rootVisualElement.Query<Label>("won-label");
-        wonLabel.visible = playerWon;
-
-        Label lostLabel = document.rootVisualElement.Query<Label>("lost-label");
-        lostLabel.visible = !playerWon;
+        Label resultLabel = document.rootVisualElement.Query<Label>("result-label");
+        resultLabel.text = playerWon ? "You Won" : "You Lost";
+        resultLabel.style.color = playerWon ? Color.green : Color.red;
     }
 
     private void OnDisable()

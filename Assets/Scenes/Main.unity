@@ -2391,6 +2391,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   document: {fileID: 351788912}
+  instructionsText: 'Dodge the seagulls for 30 seconds to win.
+
+
+    Move the crab
+    using WASD or Arrow keys.'
   easyPressed:
     m_PersistentCalls:
       m_Calls:
