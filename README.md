@@ -1,15 +1,17 @@
-# AIGT Project
+# Crab Game
 
-## Project description
+Project for the AIGT course at Utrecht University.
 
-Project for the "AI for Game Technology" course about Reinforcement Learning.
+Play as a crab trapped inside a sandbox and avoid getting eaten (touching)
+moving seagulls for 30 seconds by moving away from them.
+The environment is 2D and player movement is horizontal, vertical
+or diagonal, using either the arrow keys or WASD keys from a keyboard.
 
-## Game Design
+The player can choose between 3 difficulty levels before starting each run.
 
-Move a crab inside a sandbox in order to dodge moving seagulls. The player should survive
-the most time he can without touching any seagull.
-The environment is 2D. Player movement is horizontal, vertical or diagonal, using either the
-arrow keys or WASD keys from a keyboard.
-Seagulls spawn in a random spot in the border of the sandbox, and move in a single
-direction. The spawn point can be one from a set of possible points (currently North, Sound,
-East and West), and the direction is the player's position at spawn time.
+
+| Parameter                        | Easy               | Medium              | Hard               |
+| -------------------------------- | ------------------ | ------------------- | ------------------ |
+| Seagull Speed (units/s)          | 12                 | 15                  | 17                 |
+| Seagull Spawn Cooldown (seconds) | 0.5 (2 seagulls/s) | 0.3 (~3 seagulls/s) | 0.3 (5 seagulls/s) |
+
