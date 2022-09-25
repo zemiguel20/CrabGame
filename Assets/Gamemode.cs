@@ -60,7 +60,7 @@ public class GameMode : MonoBehaviour
 
     public void StartEasyRun()
     {
-        selectedSeagullSpeed = seagullSpawnCooldownEasy;
+        selectedSeagullSpeed = seagullSpeedEasy;
         selectedSpawnCooldown = new WaitForSeconds(seagullSpawnCooldownEasy);
         StartGame();
     }
