@@ -32,8 +32,7 @@ public class GameMode : MonoBehaviour
     private WaitForSeconds selectedSpawnCooldown;
     private Coroutine seagullSpawner;
 
-    // Make spawnpoints a GameObject
-    [SerializeField] private List<Vector3> seagullSpawnPoints;
+    [SerializeField] private List<GameObject> seagullSpawnPoints;
     private List<GameObject> instancePool;
 
     public UnityEvent gameLost;
@@ -154,7 +153,7 @@ public class GameMode : MonoBehaviour
         spawnedInstance.SetActive(true);
         // Set random spawn point
         int randomInd = Random.Range(0, seagullSpawnPoints.Count);
-        spawnedInstance.transform.position = seagullSpawnPoints[randomInd];
+        spawnedInstance.transform.position = seagullSpawnPoints[randomInd].transform.position;
         // Set movement
         SeagullController sgcomponent = spawnedInstance.GetComponent<SeagullController>();
         sgcomponent.speed = selectedSeagullSpeed;
