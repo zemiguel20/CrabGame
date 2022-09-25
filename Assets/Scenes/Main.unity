@@ -6385,17 +6385,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438905ae8e01e4f41ad6bc226d1ef533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLimit: 30
   playerInstance: {fileID: 1376404007}
   playerSpeed: 20
-  seagullSpeedEasy: 10
+  seagullSpeedEasy: 12
   seagullSpawnCooldownEasy: 0.5
-  seagullSpeedMedium: 13
-  seagullSpawnCooldownMedium: 0.4
+  seagullSpeedMedium: 15
+  seagullSpawnCooldownMedium: 0.3
   seagullSpeedHard: 17
-  seagullSpawnCooldownHard: 0.3
-  timeLimit: 30
+  seagullSpawnCooldownHard: 0.2
   addRandomAngle: 1
-  maxRandomAngle: 35
+  maxRandomAngle: 15
   seagullSpawnPoints:
   - {fileID: 986783325}
   - {fileID: 774823012}

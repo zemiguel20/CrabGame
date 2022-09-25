@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 2562298921217957235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5590467650853851844}
@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 6472065368803037333}
   - component: {fileID: 671537395890978535}
   - component: {fileID: 3104283774192989223}
+  - component: {fileID: 2303388479022607900}
   m_Layer: 0
   m_Name: Seagull
   m_TagString: Seagull
@@ -146,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 4064058987032844553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7290479870184311153}
@@ -164,8 +165,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.39, z: 2.2}
-  m_Center: {x: 0, y: 0, z: 0.12}
+  m_Size: {x: 0.38, y: 0.2, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0.06}
 --- !u!54 &671537395890978535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -195,6 +196,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+--- !u!114 &2303388479022607900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064058987032844553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693fe5c1a19fc6e49b802b035f63dcbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   meshRenderer: {fileID: 4292574006620413460}
 --- !u!1 &5890337086628498345
 GameObject:

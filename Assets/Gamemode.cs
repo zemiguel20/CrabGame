@@ -5,6 +5,10 @@ using UnityEngine.Events;
 
 public class GameMode : MonoBehaviour
 {
+    [SerializeField] private int timeLimit;
+
+    [Space(10)]
+
     [SerializeField] private GameObject playerInstance;
     [SerializeField] private float playerSpeed;
 
@@ -21,10 +25,6 @@ public class GameMode : MonoBehaviour
     [Header("Hard Difficulty")]
     [SerializeField] private float seagullSpeedHard;
     [SerializeField] private float seagullSpawnCooldownHard;
-
-    [Space(10)]
-
-    [SerializeField] private int timeLimit;
 
     [Space(10)]
 

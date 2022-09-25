@@ -8,17 +8,9 @@ public class SeagullController : MonoBehaviour
 
     private Rigidbody rb;
 
-    [SerializeField] private MeshRenderer meshRenderer;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        if (!meshRenderer.isVisible)
-            gameObject.SetActive(false);
     }
 
     void FixedUpdate()
