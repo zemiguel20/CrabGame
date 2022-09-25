@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,8 +7,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider))]
 public class CrabController : MonoBehaviour
 {
-    public float speed;
-    public Vector2 directionInput;
+    [NonSerialized] public float speed;
+    [NonSerialized] public Vector2 directionInput;
 
     public UnityEvent<Collision> collisionEvent;
 
@@ -42,7 +44,7 @@ public class CrabController : MonoBehaviour
             direction.z = 0.0f;
         }
 
-        rb.velocity = direction * speed;
+        rb.position += speed * Time.fixedDeltaTime * direction;
     }
 
     private void OnCollisionEnter(Collision collision)

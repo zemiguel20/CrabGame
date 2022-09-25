@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class GameMode : MonoBehaviour
 {
-    private GameObject playerInstance;
+    [SerializeField] private GameObject playerInstance;
     [SerializeField] private float playerSpeed;
 
     [Space(10)]
@@ -44,11 +44,7 @@ public class GameMode : MonoBehaviour
 
     void Awake()
     {
-        // Instance player
-        GameObject playerPrefab = Resources.Load<GameObject>("Player");
-        playerInstance = Instantiate(playerPrefab);
-        playerInstance.GetComponent<CrabController>().collisionEvent.AddListener(PlayerHitCallback);
-        playerInstance.SetActive(false);
+        DespawnPlayer();
 
         // Instance pool of seagulls
         GameObject seagullPrefab = Resources.Load<GameObject>("Seagull");
@@ -58,7 +54,8 @@ public class GameMode : MonoBehaviour
             GameObject instance = Instantiate(seagullPrefab);
             instancePool.Add(instance);
         }
-        SetAllSeagullsInactive();
+
+        DespawnAllSeagull();
     }
 
     public void StartEasyRun()
@@ -84,26 +81,52 @@ public class GameMode : MonoBehaviour
 
     void StartGame()
     {
-        // Activate and position player
-        playerInstance.transform.position = new Vector3(0.0f, 0.5f, 0.0f);
-        playerInstance.GetComponent<CrabController>().speed = playerSpeed;
-        playerInstance.SetActive(true);
-
-        SetAllSeagullsInactive();
-
+        SpawnPlayer();
         time = 0;
 
-        seagullSpawner = StartCoroutine(SeagullSpawnLoop());
+        seagullSpawner = StartCoroutine(SeagullSpawner());
         timeCount = StartCoroutine(TimeCount());
     }
 
-    IEnumerator SeagullSpawnLoop()
+    IEnumerator SeagullSpawner()
     {
         while (true)
         {
             yield return selectedSpawnCooldown;
             SpawnSeagull();
         }
+    }
+
+    IEnumerator TimeCount()
+    {
+        while (time < timeLimit)
+        {
+            yield return new WaitForSeconds(1.0f);
+            time++;
+        }
+
+        EndGame(true);
+    }
+
+    public void PlayerHitCallback(Collision collision)
+    {
+        if (collision.collider.CompareTag("Seagull"))
+        {
+            EndGame(false);
+        }
+    }
+
+    void EndGame(bool playerWon)
+    {
+        StopCoroutine(timeCount);
+        StopCoroutine(seagullSpawner);
+        DespawnAllSeagull();
+        playerInstance.SetActive(false);
+
+        if (playerWon)
+            gameWon.Invoke();
+        else
+            gameLost.Invoke();
     }
 
     void SpawnSeagull()
@@ -141,43 +164,23 @@ public class GameMode : MonoBehaviour
         sgcomponent.SetDirection(seagullDirection);
     }
 
-    IEnumerator TimeCount()
-    {
-        while (time < timeLimit)
-        {
-            yield return new WaitForSeconds(1.0f);
-            time++;
-        }
-
-        EndGame(true);
-    }
-
-    private void PlayerHitCallback(Collision collision)
-    {
-        if (collision.collider.CompareTag("Seagull"))
-        {
-            EndGame(false);
-        }
-    }
-
-    public void EndGame(bool playerWon)
-    {
-        StopCoroutine(timeCount);
-        StopCoroutine(seagullSpawner);
-        SetAllSeagullsInactive();
-        playerInstance.SetActive(false);
-
-        if (playerWon)
-            gameWon.Invoke();
-        else
-            gameLost.Invoke();
-    }
-
-    public void SetAllSeagullsInactive()
+    void DespawnAllSeagull()
     {
         foreach (GameObject seagull in instancePool)
         {
             seagull.SetActive(false);
         }
+    }
+
+    void SpawnPlayer()
+    {
+        playerInstance.transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+        playerInstance.GetComponent<CrabController>().speed = playerSpeed;
+        playerInstance.SetActive(true);
+    }
+
+    void DespawnPlayer()
+    {
+        playerInstance.SetActive(false);
     }
 }
