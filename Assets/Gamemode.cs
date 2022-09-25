@@ -89,11 +89,7 @@ public class GameMode : MonoBehaviour
         playerInstance.GetComponent<CrabController>().speed = playerSpeed;
         playerInstance.SetActive(true);
 
-        // Set all seagull instances inactive
-        foreach (GameObject instance in instancePool)
-        {
-            instance.SetActive(false);
-        }
+        SetAllSeagullsInactive();
 
         time = 0;
 
