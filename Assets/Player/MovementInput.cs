@@ -1,17 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementInput : MonoBehaviour
 {
     [SerializeField] private CrabController controller;
 
-    void Update()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 direction = new(
-            Input.GetAxisRaw("HorizontalKeys"),
-            Input.GetAxisRaw("VerticalKeys")
-            );
-        direction.Normalize();
-
-        controller.directionInput = direction;
+        controller.directionInput = context.ReadValue<Vector2>();
     }
 }

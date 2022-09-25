@@ -18,6 +18,13 @@
     border-bottom-color: rgb(0, 209, 241);
 }
 
+.button:focus {
+    border-left-color: rgb(0, 209, 241);
+    border-right-color: rgb(0, 209, 241);
+    border-top-color: rgb(0, 209, 241);
+    border-bottom-color: rgb(0, 209, 241);
+}
+
 .text {
     -unity-font-style: bold;
     font-size: 15px;
