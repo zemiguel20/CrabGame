@@ -6393,7 +6393,9 @@ MonoBehaviour:
   seagullSpawnCooldownMedium: 0.4
   seagullSpeedHard: 17
   seagullSpawnCooldownHard: 0.3
-  timeLimit: 10
+  timeLimit: 30
+  addRandomAngle: 1
+  maxRandomAngle: 35
   seagullSpawnPoints:
   - {fileID: 986783325}
   - {fileID: 774823012}

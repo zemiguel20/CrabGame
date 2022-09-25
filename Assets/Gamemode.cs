@@ -28,6 +28,9 @@ public class GameMode : MonoBehaviour
 
     [Space(10)]
 
+    [SerializeField] private bool addRandomAngle;
+    [SerializeField] private float maxRandomAngle;
+
     private float selectedSeagullSpeed;
     private WaitForSeconds selectedSpawnCooldown;
     private Coroutine seagullSpawner;
@@ -161,6 +164,11 @@ public class GameMode : MonoBehaviour
             playerInstance.transform.position.x,
             playerInstance.transform.position.z);
         sgcomponent.SetDirection(seagullDirection);
+        if (addRandomAngle)
+        {
+            spawnedInstance.transform.Rotate(spawnedInstance.transform.up,
+                Random.Range(-maxRandomAngle, maxRandomAngle));
+        }
     }
 
     void DespawnAllSeagull()
