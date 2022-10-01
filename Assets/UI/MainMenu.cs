@@ -6,8 +6,10 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private UIDocument document;
 
+    [TextArea]
+    [SerializeField] private string instructionsText;
+
     public UnityEvent playPressed;
-    public UnityEvent quitPressed;
 
     void OnEnable()
     {
@@ -15,15 +17,9 @@ public class MainMenu : MonoBehaviour
         playButton.clicked += playPressed.Invoke;
 
         Button quitButton = document.rootVisualElement.Query<Button>("quit-button");
-        quitButton.clicked += quitPressed.Invoke;
-    }
+        quitButton.clicked += Application.Quit;
 
-    private void OnDisable()
-    {
-        Button playButton = document.rootVisualElement.Query<Button>("play-button");
-        playButton.clicked -= playPressed.Invoke;
-
-        Button quitButton = document.rootVisualElement.Query<Button>("quit-button");
-        quitButton.clicked -= quitPressed.Invoke;
+        Label instructions = document.rootVisualElement.Query<Label>("instructions-text");
+        instructions.text = instructionsText;
     }
 }

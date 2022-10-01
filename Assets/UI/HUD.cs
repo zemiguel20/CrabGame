@@ -5,17 +5,17 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private UIDocument document;
 
-    [SerializeField] private GameMode gameMode;
-
     private Label timeLabel;
+    private GameMode gameMode;
 
-    private void OnEnable()
+    void OnEnable()
     {
         timeLabel = document.rootVisualElement.Query<Label>("time-label");
+        gameMode = FindObjectOfType<GameMode>();
     }
 
-    private void Update()
+    void Update()
     {
-        timeLabel.text = gameMode.time.ToString("F0");
+        timeLabel.text = gameMode.time.ToString();
     }
 }

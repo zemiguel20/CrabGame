@@ -1,7 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Style.uss?fileID=7433441132597879392&amp;guid=ee8a1dd73f6dd4e4ab17756b11e9819c&amp;type=3#Style" />
     <ui:VisualElement style="width: 100%; align-items: center; justify-content: space-between; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
-        <ui:Label text="You Lost" display-tooltip-when-elided="true" name="result-label" enable-rich-text="false" class="title" style="font-size: 30px; color: rgb(255, 12, 0); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0);" />
-        <ui:Button text="Continue" display-tooltip-when-elided="true" name="continue-button" class="button text" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" />
+        <ui:Label text="You Lost" display-tooltip-when-elided="true" name="result-label" enable-rich-text="false" class="title" style="font-size: 30px; color: rgb(255, 12, 0); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+        <ui:VisualElement style="flex-direction: row; justify-content: center;">
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="back-button" class="button text" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" />
+            <ui:Button text="Play Again" display-tooltip-when-elided="true" name="play-again-button" class="button text" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; font-size: 13px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

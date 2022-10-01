@@ -6,12 +6,16 @@ public class GameOverPanel : MonoBehaviour
 {
     [SerializeField] private UIDocument document;
 
-    public UnityEvent continuePressed;
+    public UnityEvent backPressed;
+    public UnityEvent playAgainPressed;
 
     private void OnEnable()
     {
-        Button backButton = document.rootVisualElement.Query<Button>("continue-button");
-        backButton.clicked += continuePressed.Invoke;
+        Button backButton = document.rootVisualElement.Query<Button>("back-button");
+        backButton.clicked += backPressed.Invoke;
+
+        Button playAgainButton = document.rootVisualElement.Query<Button>("play-again-button");
+        playAgainButton.clicked += playAgainPressed.Invoke;
     }
 
     public void SetResult(bool playerWon)
@@ -19,11 +23,5 @@ public class GameOverPanel : MonoBehaviour
         Label resultLabel = document.rootVisualElement.Query<Label>("result-label");
         resultLabel.text = playerWon ? "You Won" : "You Lost";
         resultLabel.style.color = playerWon ? Color.green : Color.red;
-    }
-
-    private void OnDisable()
-    {
-        Button backButton = document.rootVisualElement.Query<Button>("continue-button");
-        backButton.clicked -= continuePressed.Invoke;
     }
 }

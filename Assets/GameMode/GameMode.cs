@@ -1,13 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameMode : MonoBehaviour
 {
     const int TIME_LIMIT = 30;
     const int STARTING_SEAGULL_POOL_SIZE = 20;
-    const float MAX_ANGLE = 35;
 
     [SerializeField] private Vector3 playerSpawnPoint;
     [SerializeField] private List<GameObject> seagullSpawnPoints;
@@ -21,8 +20,7 @@ public class GameMode : MonoBehaviour
 
     public int time { get; private set; }
 
-    public UnityEvent gameLost;
-    public UnityEvent gameWon;
+    public Action<bool> gameEnded;
 
     void Awake()
     {
@@ -104,7 +102,7 @@ public class GameMode : MonoBehaviour
         spawnedInstance.SetActive(true);
 
         // Set random spawn point
-        int randomInd = Random.Range(0, seagullSpawnPoints.Count);
+        int randomInd = UnityEngine.Random.Range(0, seagullSpawnPoints.Count);
         spawnedInstance.transform.position = seagullSpawnPoints[randomInd].transform.position;
 
         SeagullController controller = spawnedInstance.GetComponent<SeagullController>();
@@ -132,9 +130,6 @@ public class GameMode : MonoBehaviour
         playerInstance.SetActive(false);
         foreach (GameObject seagull in seagullInstancePool) seagull.SetActive(false);
 
-        if (playerWon)
-            gameWon.Invoke();
-        else
-            gameLost.Invoke();
+        gameEnded?.Invoke(playerWon);
     }
 }
