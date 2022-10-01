@@ -5,7 +5,7 @@ using UnityEngine;
 public class SeagullController : MonoBehaviour
 {
     public float speed;
-
+    public float maxAngle;
     private Rigidbody rb;
 
     private void Awake()
@@ -13,14 +13,31 @@ public class SeagullController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public void SetDirection(Vector2 target)
+    {
+        transform.LookAt(new Vector3(target.x, transform.position.y, target.y));
+        transform.Rotate(transform.up, Random.Range(-maxAngle, maxAngle));
+    }
+
     void FixedUpdate()
     {
+        //rb.velocity = transform.forward * speed;
         rb.position += transform.forward * speed * Time.fixedDeltaTime;
     }
 
-    public void SetDirection(Vector2 direction)
+    void OnCollisionEnter(Collision collision)
     {
-        Vector3 dir3D = new Vector3(direction.x, transform.position.y, direction.y);
-        transform.LookAt(dir3D);
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("Collided with player");
+
+            GameMode gamemode = FindObjectOfType<GameMode>();
+            if (gamemode != null) gamemode.EndGame(false);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        gameObject.SetActive(false);
     }
 }

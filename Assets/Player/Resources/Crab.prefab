@@ -606,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 6355885309500205235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9045482728307654509}
@@ -634,8 +634,8 @@ GameObject:
   - component: {fileID: 2476808165352884156}
   - component: {fileID: 6737430563464900330}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: Crab
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 7181463978790111822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 718142883443880286}
@@ -683,7 +683,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 5, z: 0.7}
+  m_Size: {x: 0.6, y: 0.35, z: 0.35}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6737430563464900330
 MonoBehaviour:
@@ -697,9 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38f1465c33ab0243b7c90296a5b48b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  speed: 20
 --- !u!1 &7773329278787030962
 GameObject:
   m_ObjectHideFlags: 0

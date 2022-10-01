@@ -1,35 +1,30 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 public class CrabController : MonoBehaviour
 {
-    [NonSerialized] public float speed;
-    [NonSerialized] public Vector2 directionInput;
-
-    public UnityEvent<Collision> collisionEvent;
+    public float speed;
 
     private Rigidbody rb;
     private BoxCollider coll;
 
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        directionInput.Normalize();
-        Vector3 direction = new Vector3(directionInput.x, 0.0f, directionInput.y);
+        Vector3 direction = ReadInputDirection();
 
         // If colliding horizontally, nullify horizontal direction
         // Allows vertical wall sliding
         Vector3 horizontalDir = new Vector3(direction.x, 0.0f, 0.0f);
-        Debug.DrawRay(rb.position, horizontalDir * coll.size.x * 0.5f);
-        if (Physics.Raycast(rb.position, horizontalDir, coll.size.x * 0.5f))
+        float horizontalLength = coll.size.x * 0.5f * transform.lossyScale.x + 0.1f;
+        Debug.DrawRay(rb.position, horizontalDir.normalized * horizontalLength);
+        if (Physics.Raycast(rb.position, horizontalDir, horizontalLength))
         {
             direction.x = 0.0f;
         }
@@ -37,17 +32,23 @@ public class CrabController : MonoBehaviour
         // If colliding vertically, nullify vertical direction
         // Allows horizontal wall sliding
         Vector3 verticalDir = new Vector3(0.0f, 0.0f, direction.z);
-        Debug.DrawRay(rb.position, verticalDir * coll.size.z * 0.5f);
-        if (Physics.Raycast(rb.position, verticalDir, coll.size.z * 0.5f))
+        float verticalLength = coll.size.z * 0.5f * transform.lossyScale.z + 0.1f;
+        Debug.DrawRay(rb.position, verticalDir.normalized * verticalLength);
+        if (Physics.Raycast(rb.position, verticalDir, verticalLength))
         {
             direction.z = 0.0f;
         }
 
-        rb.position += speed * Time.fixedDeltaTime * direction;
+        Vector3 newVelocity = speed * direction;
+        newVelocity.y = rb.velocity.y;
+        rb.velocity = newVelocity;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    Vector3 ReadInputDirection()
     {
-        collisionEvent.Invoke(collision);
+        Vector3 dir = Vector3.zero;
+        dir.x = Input.GetAxisRaw("Horizontal");
+        dir.z = Input.GetAxisRaw("Vertical");
+        return dir.normalized;
     }
 }
