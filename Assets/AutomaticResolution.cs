@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class AutomaticResolution : MonoBehaviour
 {
     private void Awake()
     {
@@ -15,10 +14,5 @@ public class GameManager : MonoBehaviour
             Display.main.renderingWidth;
 
         Screen.SetResolution(length, length, true);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }

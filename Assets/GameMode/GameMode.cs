@@ -9,7 +9,7 @@ public class GameMode : MonoBehaviour
     const int STARTING_SEAGULL_POOL_SIZE = 20;
 
     [SerializeField] private Vector3 playerSpawnPoint;
-    [SerializeField] private List<GameObject> seagullSpawnPoints;
+    [SerializeField] private List<Vector3> seagullSpawnPoints;
     [SerializeField] private List<GameDifficulty> difficultyLevels;
 
     private GameObject playerInstance;
@@ -103,7 +103,7 @@ public class GameMode : MonoBehaviour
 
         // Set random spawn point
         int randomInd = UnityEngine.Random.Range(0, seagullSpawnPoints.Count);
-        spawnedInstance.transform.position = seagullSpawnPoints[randomInd].transform.position;
+        spawnedInstance.transform.position = seagullSpawnPoints[randomInd];
 
         SeagullController controller = spawnedInstance.GetComponent<SeagullController>();
         Vector2 target = new Vector2(playerInstance.transform.position.x, playerInstance.transform.position.z);
@@ -131,5 +131,19 @@ public class GameMode : MonoBehaviour
         foreach (GameObject seagull in seagullInstancePool) seagull.SetActive(false);
 
         gameEnded?.Invoke(playerWon);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawIcon(playerSpawnPoint, "icon-egg");
+        Gizmos.DrawWireSphere(playerSpawnPoint, 2.0f);
+
+        Gizmos.color = Color.red;
+        foreach(Vector3 point in seagullSpawnPoints)
+        {
+            Gizmos.DrawIcon(point, "icon-egg");
+            Gizmos.DrawWireSphere(point, 2.0f);
+        }
     }
 }
