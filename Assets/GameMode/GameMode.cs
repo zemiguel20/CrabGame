@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMode : MonoBehaviour
@@ -10,17 +11,16 @@ public class GameMode : MonoBehaviour
 
     [SerializeField] private Vector3 playerSpawnPoint;
     [SerializeField] private List<Vector3> seagullSpawnPoints;
-    [SerializeField] private List<GameDifficulty> difficultyLevels;
+
+    public GameDifficulty currentDifficulty;
+    public int time { get; private set; }
+    public bool running { get; private set; }
+    public event Action<bool> gameEnded;
 
     private GameObject playerInstance;
     private List<GameObject> seagullInstancePool;
-    private GameDifficulty currentDifficulty;
     private Coroutine seagullSpawner;
     private Coroutine timeCount;
-
-    public int time { get; private set; }
-
-    public Action<bool> gameEnded;
 
     void Awake()
     {
@@ -38,27 +38,12 @@ public class GameMode : MonoBehaviour
             instance.SetActive(false);
             seagullInstancePool.Add(instance);
         }
+
+        time = 0;
+        running = false;
     }
 
-    public void StartEasyRun()
-    {
-        currentDifficulty = difficultyLevels[0];
-        StartGame();
-    }
-
-    public void StartMediumRun()
-    {
-        currentDifficulty = difficultyLevels[1];
-        StartGame();
-    }
-
-    public void StartHardRun()
-    {
-        currentDifficulty = difficultyLevels[2];
-        StartGame();
-    }
-
-    void StartGame()
+    public void StartGame()
     {
         playerInstance.transform.position = playerSpawnPoint;
         playerInstance.SetActive(true);
@@ -67,6 +52,8 @@ public class GameMode : MonoBehaviour
 
         seagullSpawner = StartCoroutine(SeagullSpawner());
         timeCount = StartCoroutine(TimeCount());
+
+        running = true;
     }
 
     IEnumerator SeagullSpawner()
@@ -130,6 +117,8 @@ public class GameMode : MonoBehaviour
         playerInstance.SetActive(false);
         foreach (GameObject seagull in seagullInstancePool) seagull.SetActive(false);
 
+        running = false;
+
         gameEnded?.Invoke(playerWon);
     }
 
@@ -140,10 +129,25 @@ public class GameMode : MonoBehaviour
         Gizmos.DrawWireSphere(playerSpawnPoint, 2.0f);
 
         Gizmos.color = Color.red;
-        foreach(Vector3 point in seagullSpawnPoints)
+        foreach (Vector3 point in seagullSpawnPoints)
         {
             Gizmos.DrawIcon(point, "icon-egg");
             Gizmos.DrawWireSphere(point, 2.0f);
         }
     }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if (running)
+        {
+            GUI.skin.button.fontSize = 15;
+            GUI.skin.button.fontStyle = FontStyle.Bold;
+            GUILayout.BeginArea(new Rect(20, 130, 100, 100));
+            if (GUILayout.Button("Win Game")) { EndGame(true); time = 30; } // set time just for info purposes
+            if (GUILayout.Button("Lose Game")) { EndGame(false); }
+            GUILayout.EndArea();
+        }
+    }
+#endif
 }

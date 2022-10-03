@@ -5940,6 +5940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640968359}
   - component: {fileID: 640968358}
+  - component: {fileID: 640968360}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -5969,10 +5970,7 @@ MonoBehaviour:
   - {x: -35, y: 1, z: -35}
   - {x: 0, y: 1, z: -35}
   - {x: 35, y: 1, z: -35}
-  difficultyLevels:
-  - {fileID: 11400000, guid: 2e9c39a5034c09548b4be2e57ebda9c9, type: 2}
-  - {fileID: 11400000, guid: 3c87af2254db80f4fac17d5cb1cbb0d5, type: 2}
-  - {fileID: 11400000, guid: 38da13e528867b44da3b7152df293686, type: 2}
+  currentDifficulty: {fileID: 11400000, guid: 3c87af2254db80f4fac17d5cb1cbb0d5, type: 2}
 --- !u!4 &640968359
 Transform:
   m_ObjectHideFlags: 0
@@ -5988,6 +5986,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640968360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640968357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74f1bb9e50870a41a929136818c62ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMode: {fileID: 640968358}
+  difficultyLevels:
+  - {fileID: 11400000, guid: 2e9c39a5034c09548b4be2e57ebda9c9, type: 2}
+  - {fileID: 11400000, guid: 3c87af2254db80f4fac17d5cb1cbb0d5, type: 2}
+  - {fileID: 11400000, guid: 38da13e528867b44da3b7152df293686, type: 2}
+  startDifficultyLevel: 0
 --- !u!1001 &648606733
 PrefabInstance:
   m_ObjectHideFlags: 0

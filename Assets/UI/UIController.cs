@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class UIController : MonoBehaviour
         hud.gameObject.SetActive(true);
 
         GameMode gameMode = FindObjectOfType<GameMode>();
-        gameMode.StartMediumRun();
+        gameMode.StartGame();
         gameMode.gameEnded += OnGameEnded;
     }
 
