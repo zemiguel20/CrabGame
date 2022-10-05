@@ -77,3 +77,6 @@ Unity.VisualScripting*
 
 # UI elements
 UIElementsSchema/
+
+# TextMesh Pro files
+[Aa]ssets/TextMesh*Pro*
